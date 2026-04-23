@@ -15,6 +15,8 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedNewRouteImport } from './routes/_authenticated/new'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedPageIdRouteImport } from './routes/_authenticated/page.$id'
+import { Route as AuthenticatedPageIdEditRouteImport } from './routes/_authenticated/page.$id.edit'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -45,6 +47,16 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedPageIdRoute = AuthenticatedPageIdRouteImport.update({
+  id: '/page/$id',
+  path: '/page/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPageIdEditRoute = AuthenticatedPageIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => AuthenticatedPageIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -52,6 +64,8 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/new': typeof AuthenticatedNewRoute
+  '/page/$id': typeof AuthenticatedPageIdRouteWithChildren
+  '/page/$id/edit': typeof AuthenticatedPageIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +73,8 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/new': typeof AuthenticatedNewRoute
+  '/page/$id': typeof AuthenticatedPageIdRouteWithChildren
+  '/page/$id/edit': typeof AuthenticatedPageIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +84,28 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/new': typeof AuthenticatedNewRoute
+  '/_authenticated/page/$id': typeof AuthenticatedPageIdRouteWithChildren
+  '/_authenticated/page/$id/edit': typeof AuthenticatedPageIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/signup' | '/dashboard' | '/new'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/dashboard'
+    | '/new'
+    | '/page/$id'
+    | '/page/$id/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/signup' | '/dashboard' | '/new'
+  to:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/dashboard'
+    | '/new'
+    | '/page/$id'
+    | '/page/$id/edit'
   id:
     | '__root__'
     | '/'
@@ -82,6 +114,8 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_authenticated/dashboard'
     | '/_authenticated/new'
+    | '/_authenticated/page/$id'
+    | '/_authenticated/page/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -135,17 +169,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/page/$id': {
+      id: '/_authenticated/page/$id'
+      path: '/page/$id'
+      fullPath: '/page/$id'
+      preLoaderRoute: typeof AuthenticatedPageIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/page/$id/edit': {
+      id: '/_authenticated/page/$id/edit'
+      path: '/edit'
+      fullPath: '/page/$id/edit'
+      preLoaderRoute: typeof AuthenticatedPageIdEditRouteImport
+      parentRoute: typeof AuthenticatedPageIdRoute
+    }
   }
 }
+
+interface AuthenticatedPageIdRouteChildren {
+  AuthenticatedPageIdEditRoute: typeof AuthenticatedPageIdEditRoute
+}
+
+const AuthenticatedPageIdRouteChildren: AuthenticatedPageIdRouteChildren = {
+  AuthenticatedPageIdEditRoute: AuthenticatedPageIdEditRoute,
+}
+
+const AuthenticatedPageIdRouteWithChildren =
+  AuthenticatedPageIdRoute._addFileChildren(AuthenticatedPageIdRouteChildren)
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedNewRoute: typeof AuthenticatedNewRoute
+  AuthenticatedPageIdRoute: typeof AuthenticatedPageIdRouteWithChildren
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedNewRoute: AuthenticatedNewRoute,
+  AuthenticatedPageIdRoute: AuthenticatedPageIdRouteWithChildren,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
