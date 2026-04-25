@@ -98,14 +98,14 @@ serve(async (req) => {
 
   try {
     const { input, section } = await req.json();
-    const AI_GATEWAY_API_KEY = Deno.env.get("AI_GATEWAY_API_KEY");
-    const AI_GATEWAY_URL = Deno.env.get("AI_GATEWAY_URL");
-    if (!AI_GATEWAY_API_KEY) throw new Error("AI_GATEWAY_API_KEY not configured");
-    if (!AI_GATEWAY_URL) throw new Error("AI_GATEWAY_URL not configured");
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const LOVABLE_URL = Deno.env.get("LOVABLE_URL");
+    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY not configured");
+    if (!LOVABLE_URL) throw new Error("LOVABLE_URL not configured");
 
-    const response = await fetch(AI_GATEWAY_URL, {
+    const response = await fetch(LOVABLE_URL, {
       method: "POST",
-      headers: { Authorization: `Bearer ${AI_GATEWAY_API_KEY}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${LOVABLE_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: "google/gemini-3-flash-preview",
         messages: [
