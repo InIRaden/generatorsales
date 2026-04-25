@@ -1,8 +1,8 @@
-import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/auth-context";
-import appCss from "../styles.css?url";
 
 const queryClient = new QueryClient();
 
@@ -19,28 +19,18 @@ function NotFoundComponent() {
   );
 }
 
+function HeadManager() {
+  useEffect(() => {
+    document.title = "PageForge — AI Sales Page Generator";
+  }, []);
+  return null;
+}
+
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PageForge — AI Sales Page Generator" },
-      { name: "description", content: "Turn any product into a high-converting sales page in seconds with AI." },
-      { property: "og:title", content: "PageForge — AI Sales Page Generator" },
-      { name: "twitter:title", content: "PageForge — AI Sales Page Generator" },
-      { property: "og:description", content: "Turn any product into a high-converting sales page in seconds with AI." },
-      { name: "twitter:description", content: "Turn any product into a high-converting sales page in seconds with AI." },
-      { property: "og:image", content: "https://ui-avatars.com/api/?name=Raden+Mahesa&background=111827&color=ffffff&size=1200&rounded=true&bold=true&format=png" },
-      { name: "twitter:image", content: "https://ui-avatars.com/api/?name=Raden+Mahesa&background=111827&color=ffffff&size=1200&rounded=true&bold=true&format=png" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "stylesheet", href: appCss }],
-  }),
-  shellComponent: RootShell,
   component: () => (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <HeadManager />
         <Outlet />
         <Toaster richColors position="top-right" />
       </AuthProvider>
@@ -48,12 +38,3 @@ export const Route = createRootRoute({
   ),
   notFoundComponent: NotFoundComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className="dark">
-      <head><HeadContent /></head>
-      <body>{children}<Scripts /></body>
-    </html>
-  );
-}
