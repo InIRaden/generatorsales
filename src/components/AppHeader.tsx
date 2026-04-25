@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, LogOut, LayoutDashboard, Plus } from "lucide-react";
+import { LogOut, LayoutDashboard, Plus } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 
@@ -11,7 +11,7 @@ export function AppHeader() {
       <div className="mx-auto max-w-7xl flex h-16 items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <div className="h-8 w-8 rounded-lg bg-gradient-brand flex items-center justify-center glow-brand">
-            <Sparkles className="h-4 w-4 text-primary-foreground" />
+            <span className="text-xs font-bold tracking-wide text-primary-foreground">RM</span>
           </div>
           <span className="text-lg">PageForge</span>
         </Link>

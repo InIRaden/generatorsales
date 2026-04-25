@@ -28,7 +28,7 @@ function Landing() {
           <div className="mx-auto max-w-4xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
               <Sparkles className="h-3 w-3 text-primary" />
-              Powered by Lovable AI
+              Powered by Raden Mahesa
             </span>
             <h1 className="mt-6 text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight">
               Turn any product into a{" "}
@@ -89,7 +89,7 @@ function Landing() {
         </section>
 
         <footer className="border-t border-white/10 py-8 text-center text-xs text-muted-foreground">
-          Built with Lovable Cloud + Lovable AI
+          Built with Raden Mahesa
         </footer>
       </div>
     </div>

@@ -1,4 +1,0 @@
-project_id = "zlsaqsplstraxvbrazsj"
-
-[functions.generate-sales-page]
-verify_jwt = false
