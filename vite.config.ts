@@ -2,16 +2,18 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
-import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import { cloudflare } from "@cloudflare/vite-plugin";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
-    tanstackRouter({ target: "react", autoCodeSplitting: true }),
+    tanstackStart(),
     react(),
     tailwindcss(),
     tsconfigPaths(),
+    ...(command === "build" ? [cloudflare()] : []),
   ],
   resolve: {
-    dedupe: ["react", "react-dom", "@tanstack/react-router"],
+    dedupe: ["react", "react-dom", "@tanstack/react-router", "@tanstack/react-start"],
   },
-});
+}));
