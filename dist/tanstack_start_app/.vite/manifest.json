@@ -1,0 +1,48 @@
+{
+  "%23tanstack-start-plugin-adapters": {
+    "file": "assets/__23tanstack-start-plugin-adapters-Cwee5PKy.js",
+    "name": "__23tanstack-start-plugin-adapters",
+    "src": "%23tanstack-start-plugin-adapters",
+    "isDynamicEntry": true
+  },
+  "F:/project/Magang/PT. Dakwah Digital Network/generatorsales/src/styles.css": {
+    "file": "assets/styles-D3Xzh5ov.css",
+    "src": "F:/project/Magang/PT. Dakwah Digital Network/generatorsales/src/styles.css"
+  },
+  "__tanstack-start-manifest_v-CQKkgJfK.js": {
+    "file": "assets/_tanstack-start-manifest_v-CQKkgJfK.js",
+    "name": "_tanstack-start-manifest_v",
+    "dynamicImports": [
+      "src/router.tsx",
+      "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+      "%23tanstack-start-plugin-adapters"
+    ]
+  },
+  "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts": {
+    "file": "assets/start-HYkvq4Ni.js",
+    "name": "start",
+    "src": "node_modules/@tanstack/react-start/dist/plugin/default-entry/start.ts",
+    "isDynamicEntry": true
+  },
+  "src/router.tsx": {
+    "file": "assets/router-9sIayf-s.js",
+    "name": "router",
+    "src": "src/router.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "__tanstack-start-manifest_v-CQKkgJfK.js"
+    ],
+    "assets": [
+      "assets/styles-D3Xzh5ov.css"
+    ]
+  },
+  "virtual:cloudflare/worker-entry": {
+    "file": "index.js",
+    "name": "index",
+    "src": "virtual:cloudflare/worker-entry",
+    "isEntry": true,
+    "imports": [
+      "__tanstack-start-manifest_v-CQKkgJfK.js"
+    ]
+  }
+}
